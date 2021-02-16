@@ -1,0 +1,294 @@
+$input-border-radius: $border-radius-medium;
+
+$input-border-width: var(--input-border-width, 1px);
+
+$input-height: var(--input-height, 2.5em);
+$input-line-height: var(--input-line-height, 1.5);
+
+$input-padding-vertical: calc(0.5em - #{$input-border-width});
+$input-padding-horizontal: calc(0.75em - #{$input-border-width});
+
+$input-font-family: $font-sans;
+
+$input-font-weight: $font-weight-semibold;
+
+@mixin input-underscored {
+    input, select, textarea {           
+        @include underscored;
+
+        &:hover:not(:disabled), &:focus:not(:disabled) {
+            box-shadow: none;
+        }
+    }
+
+    &:before {
+        position: absolute;
+        bottom: 0;
+        content: '';
+        height: 2px;
+        width: 100%;
+
+        z-index: 1;
+
+        background-color: var(--input-border-hover-color);
+        box-shadow: 0 1px 0 0 var(--input-shadow-hover-color);
+
+        transform-origin: 50% 100%;
+        transform: scaleX(0);
+        transition: #{$transition-slow} transform;
+    }
+
+    &:focus-within:not(:disabled) {
+        &:before {
+            transform: scaleX(1);
+        }
+    }
+}
+
+.input-file {
+    cursor: pointer;
+
+    input {
+        height: 100%;
+        left: 0;
+        opacity: 0;
+        outline: none;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        cursor: pointer;
+    }
+}
+
+.input-radio, .input-checkbox, .input-range, .input {
+    --input-border-width: 1px;
+    --input-height: 2.5em;
+    --input-line-height: 1.5;
+
+    --input-text-color: #{nodzerTextOnColor("background")};
+    --input-placeholder-text-color: #{nodzerTextOnColor("background", -40%)};
+
+    position: relative;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    vertical-align: middle;
+
+    font-size: #{$font-size-medium};
+    font-family: #{$input-font-family};
+    font-weight: #{$input-font-weight};
+
+    color: var(--input-text-color);
+
+    input, select, textarea {
+        position: relative;
+        box-sizing: border-box;
+
+        font-size: inherit;
+        font-family: inherit;
+        font-weight: inherit;
+
+        color: inherit;
+
+        line-height: #{$input-line-height};
+        height: #{$input-height};
+    
+        margin: 0;
+
+        padding-bottom: #{$input-padding-vertical};
+        padding-left: #{$input-padding-horizontal};
+        padding-right: #{$input-padding-horizontal};
+        padding-top: #{$input-padding-vertical};
+
+        &::placeholder {
+            color: var(--input-placeholder-text-color);
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;     
+        }
+    }
+
+    &.is-fullwidth {
+        width: 100%;
+    }
+
+    &.is-disabled {
+        opacity: 0.5;
+        cursor: not-allowed;  
+    }
+
+    @include size using ($size) {
+        font-size: #{$size};
+    }
+}
+
+.input-radio, .input-checkbox {
+    input {
+        margin-left: #{$input-padding-horizontal};
+        margin-right: #{$input-padding-horizontal};
+    }
+
+    @include size using ($size) {
+        input {
+            width: #{$size};
+        }
+    }
+}
+
+.input {
+    --input-background-color-h: #{nodzerColorHue("default")};
+    --input-background-color-s: #{nodzerColorSaturation("default")};
+    --input-background-color-l: #{nodzerColorLightness("default")};
+    
+    --input-background-color: transparent;
+    --input-background-hover-color: hsla(var(--input-background-color-h), var(--input-background-color-s), var(--input-background-color-l), 0.05);
+    --input-background-focus-color: var(--input-background-hover-color);
+    --input-background-active-color: hsla(var(--input-background-color-h), var(--input-background-color-s), var(--input-background-color-l), 0.25);
+
+    --input-border-color: hsla(var(--input-background-color-h), 10%, 50%, 1);
+    --input-border-hover-color: hsla(var(--input-background-color-h), var(--input-background-color-s), calc(var(--input-background-color-l) - 10%), 1);
+    --input-border-focus-color: var(--input-border-hover-color);
+    --input-border-active-color: var(--input-border-hover-color);
+
+    --input-shadow-hover-color: hsla(var(--input-background-color-h), var(--input-background-color-s), var(--input-background-color-l), 0.33);
+    --input-shadow-focus-color: var(--input-shadow-hover-color);
+    --input-shadow-active-color: var(--input-shadow-hover-color);
+
+    &.is-rounded {
+        input, select {
+            border-radius: #{$border-radius-rounded};
+        }
+
+        textarea {
+            border-radius: #{$border-radius-x-large};
+        }
+    }
+
+    input, select, textarea {
+        width: 100%;
+
+        -moz-appearance: none;
+        -webkit-appearance: none;
+    
+        border-style: solid;
+        border-width: #{$input-border-width};
+        border-radius: #{$input-border-radius};
+    
+        box-shadow: none;
+        outline: none;
+    
+        transition: #{$transition-fast} color, #{$transition-fast} border, #{$transition-fast} box-shadow;
+
+        background-color: var(--input-background-color);
+        border-color: var(--input-border-color);
+    
+        &:hover:not(:disabled) {
+            background-color: var(--input-background-hover-color);
+            border-color: var(--input-border-hover-color);
+            box-shadow: 0 0 0 3px var(--input-shadow-hover-color);
+        }
+    
+        &:focus:not(:disabled) {
+            background-color: var(--input-background-focus-color);
+            border-color: var(--input-border-focus-color);
+            box-shadow: 0 0 0 3px var(--input-shadow-focus-color);
+        }
+    }
+
+    &.is-underscored {
+        @include input-underscored;
+    }
+
+    &.is-colored {
+        --input-border-color: hsla(var(--input-background-color-h), var(--input-background-color-s), var(--input-background-color-l), 1);
+    }
+
+    @each $color-name, $color in $colors {
+        &.is-#{$color-name} {
+            --input-background-color-h: #{nodzerColorHue($color-name)};
+            --input-background-color-s: #{nodzerColorSaturation($color-name)};
+            --input-background-color-l: #{nodzerColorLightness($color-name)};
+        }
+    }
+
+    textarea {
+        max-height: 40em;
+        min-height: 8em;
+        resize: vertical;
+    }
+
+    &.is-select {
+        select {
+            padding-right: #{$input-height};
+
+            option {
+                color: black;
+            }
+        }
+
+        &::after {
+            border: 3px solid var(--input-text-color);
+            border-radius: 2px;
+            border-right: 0;
+            border-top: 0;
+            content: " ";
+            display: block;
+            height: 0.625em;
+            margin-top: -0.4375em;
+            pointer-events: none;
+            position: absolute;
+            top: 50%;
+            right: 0.885em;
+            transform: rotate(-45deg);
+            transform-origin: center;
+            width: 0.625em;
+        }
+    }
+
+    &.has-icons-right, &.has-icons-left {
+        .icon {
+            pointer-events: none;
+            position: absolute;
+            height: #{$input-height};
+            width: #{$input-height};
+            top: 0;
+            z-index: 4;
+        }
+    }
+
+    &.has-icons-left {
+        input, select {
+            padding-left: #{$input-height};
+        }
+
+        .icon {
+            &.is-left {
+                left: 0;
+            }
+        }
+    }
+
+    &.has-icons-right {
+        input, select {
+            padding-right: #{$input-height};
+        }
+
+        &.is-select {
+            select {
+                padding-right: calc(#{$input-height} * 2);
+            }
+            &::after {
+                right: calc(#{$input-height} + 0.885em);
+            }
+        }
+
+        .icon {
+            &.is-right {
+                right: 0;
+            }
+        }
+    }
+}

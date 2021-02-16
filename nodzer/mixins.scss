@@ -1,0 +1,50 @@
+@mixin mobile {
+    @media screen and (max-width: 768px) {
+        @content;
+    }
+}
+
+@mixin not-mobile {
+    @media screen and (min-width: 769px) {
+        @content;
+    }
+}
+
+@mixin underscored {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+}
+
+@mixin space-between($prefix: "is", $spacing-list: $spacings) {
+    @each $spacing-name, $spacing in $spacing-list {
+        &.#{$prefix}-space-between-#{$spacing-name} {
+            @content($spacing);
+        }
+    }
+}
+
+@function not-sizes($current-size-name, $prefix: "is", $list: $font-sizes) {
+    $string: null;
+    @each $size-name, $size in $list {
+        @if ($size-name != $current-size-name) {
+            $string : $string + ":not(.#{$prefix}-#{$size-name})";
+        }
+    }
+    @return $string;
+}
+
+@mixin size($prefix: "is", $include-not-sizes: false, $not-prefix: "is", $size-list: $font-sizes) {
+    @each $size-name, $size in $size-list {
+        &.#{$prefix}-#{$size-name} {
+            @if $include-not-sizes {
+                $not-sizes: not-sizes($size-name, $not-prefix, $size-list);
+                @content($size, $not-sizes);
+            }
+            @else {
+                @content($size);
+            }
+        }
+    }
+}

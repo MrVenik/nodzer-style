@@ -1,0 +1,87 @@
+$font-size-xx-small: var(--font-size-xx-small, 0.625rem); 
+$font-size-x-small: var(--font-size-x-small, 0.75rem);
+$font-size-small: var(--font-size-small, 0.875rem);
+$font-size-medium: var(--font-size-medium, 1rem);
+$font-size-large: var(--font-size-large, 1.25rem);
+$font-size-x-large: var(--font-size-x-large, 1.5rem);
+$font-size-xx-large: var(--font-size-xx-large, 2.25rem);
+$font-size-xxx-large: var(--font-size-xxx-large, 3rem);
+$font-size-xxxx-large: var(--font-size-xxxx-large, 4.5rem);
+
+$font-sizes: (
+    "xx-small": $font-size-xx-small,
+    "x-small": $font-size-x-small,
+    "small": $font-size-small,
+    "medium": $font-size-medium,
+    "large": $font-size-large,
+    "x-large": $font-size-x-large,
+    "xx-large": $font-size-xx-large,
+    "xxx-large": $font-size-xxx-large,
+    "xxxx-large": $font-size-xxxx-large,
+);
+
+$spacing-xxx-small: var(--spacing-xxx-small, 0.125rem); 
+$spacing-xx-small: var(--spacing-xx-small, 0.25rem); 
+$spacing-x-small: var(--spacing-x-small, 0.5rem);
+$spacing-small: var(--spacing-small, 0.75rem);
+$spacing-medium: var(--spacing-medium, 1rem);
+$spacing-large: var(--spacing-large, 1.25rem);
+$spacing-x-large: var(--spacing-x-large, 1.75rem);
+$spacing-xx-large: var(--spacing-xx-large, 2.25rem);
+$spacing-xxx-large: var(--spacing-xxx-large, 3rem);
+$spacing-xxxx-large: var(--spacing-xxxx-large, 4.5rem);
+
+$spacings: (
+    "xxx-small": $spacing-xxx-small,
+    "xx-small": $spacing-xx-small,
+    "x-small": $spacing-x-small,
+    "small": $spacing-small,
+    "medium": $spacing-medium,
+    "large": $spacing-large,
+    "x-large": $spacing-x-large,
+    "xx-large": $spacing-xx-large,
+    "xxx-large": $spacing-xxx-large,
+    "xxxx-large": $spacing-xxxx-large,
+);
+
+$font-weight-light: var(--font-weight-light, 300);
+$font-weight-normal: var(--font-weight-normal, 400);
+$font-weight-semibold: var(--font-weight-semibold, 500);
+$font-weight-bold: var(--font-weight-bold, 700);
+
+$font-mono: var(--font-mono);
+$font-sans: var(--font-sans);
+$font-serif: var(--font-serif);
+
+:root {
+    --font-mono: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    --font-serif: Georgia, 'Times New Roman', serif;
+
+    --font-size-xx-small: 0.625rem; // 10px
+    --font-size-x-small: 0.75rem; // 12px
+    --font-size-small: 0.875rem; // 14px
+    --font-size-medium: 1rem; // 16px
+    --font-size-large: 1.25rem; // 20px
+    --font-size-x-large: 1.5rem; // 24px
+    --font-size-xx-large: 2.25rem; // 36px
+    --font-size-xxx-large: 3rem; // 48px
+    --font-size-xxxx-large: 4.5rem; // 72px
+
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-semibold: 500;
+    --font-weight-bold: 700;
+
+    --spacing-xxx-small: 0.125rem; // 2px
+    --spacing-xx-small: 0.25rem; // 4px
+    --spacing-x-small: 0.5rem; // 8px
+    --spacing-small: 0.75rem; // 12px
+    --spacing-medium: 1rem; // 16px
+    --spacing-large: 1.25rem; // 20px
+    --spacing-x-large: 1.75rem; // 28px
+    --spacing-xx-large: 2.25rem; // 36px
+    --spacing-xxx-large: 3rem; // 48px
+    --spacing-xxxx-large: 4.5rem; // 72px   
+}

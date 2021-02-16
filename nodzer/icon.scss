@@ -1,0 +1,11 @@
+.icon {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    font-size: inherit;
+    color: inherit;
+
+    @include size using ($size) {
+        font-size: #{$size};
+    }
+}

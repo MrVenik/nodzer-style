@@ -1,0 +1,196 @@
+$button-border-width: var(--button-border-width, 1px);
+$button-border-radius: $border-radius-medium;
+
+$button-height: var(--button-height, 2.5em);
+$button-line-height: var(--button-line-height, 1.5);
+
+$button-padding-vertical: calc(0.5em - #{$button-border-width});
+$button-padding-horizontal: 1em;
+
+$button-font-family: $font-sans;
+
+$button-font-weight: $font-weight-semibold;
+
+@mixin button-style {
+    color: var(--button-text-color);
+    background-color: var(--button-background-color);
+    border-color: var(--button-border-color);
+
+    &:hover:not(:disabled) {
+        background-color: var(--button-background-hover-color);
+        border-color: var(--button-border-hover-color);
+        box-shadow: 0 0 0 3px var(--button-shadow-hover-color);
+    }
+
+    &:focus:not(:disabled) {
+        background-color: var(--button-background-focus-color);
+        border-color: var(--button-border-focus-color);
+        box-shadow: 0 0 0 3px var(--button-shadow-focus-color);
+    }
+
+    &:active:not(:disabled) {
+        background-color: var(--button-background-active-color);
+        border-color: var(--button-border-active-color);
+        box-shadow: 0 0 0 4px var(--button-shadow-active-color);
+    }
+}
+
+@mixin button-colored {
+    --button-background-color: hsla(var(--button-background-color-h), var(--button-background-color-s), var(--button-background-color-l), 1);
+    --button-background-hover-color: hsla(var(--button-background-color-h), var(--button-background-color-s), calc(var(--button-background-color-l) - 5%), 1);
+    --button-background-focus-color: var(--button-background-hover-color);
+    --button-background-active-color: hsla(var(--button-background-color-h), var(--button-background-color-s), var(--button-background-color-l), 1);
+
+    --button-border-color: hsla(var(--button-background-color-h), var(--button-background-color-s), var(--button-background-color-l), 1);
+    --button-border-hover-color: hsla(var(--button-background-color-h), var(--button-background-color-s), calc(var(--button-background-color-l) - 5%), 1);
+    --button-border-focus-color: var(--button-border-hover-color);
+    --button-border-active-color: hsla(var(--button-background-color-h), var(--button-background-color-s), var(--button-background-color-l), 1);
+
+    --button-shadow-hover-color: hsla(var(--button-background-color-h), var(--button-background-color-s), var(--button-background-color-l), 0.33);
+    --button-shadow-focus-color: var(--button-shadow-hover-color);
+    --button-shadow-active-color: var(--button-shadow-hover-color);
+}
+
+@mixin button-outlined {
+    --button-text-color: #{nodzerTextOnColor("background")};
+
+    --button-background-color: transparent;
+    --button-background-hover-color: hsla(var(--button-background-color-h), var(--button-background-color-s), var(--button-background-color-l), 0.1);
+    --button-background-focus-color: var(--button-background-hover-color);
+    --button-background-active-color: hsla(var(--button-background-color-h), var(--button-background-color-s), var(--button-background-color-l), 0.25);
+
+    --button-border-color: hsla(var(--button-background-color-h), 10%, 50%, 1);
+    --button-border-hover-color: hsla(var(--button-background-color-h), var(--button-background-color-s), calc(var(--button-background-color-l) - 10%), 1);
+    --button-border-focus-color: var(--button-border-hover-color);
+    --button-border-active-color: var(--button-border-hover-color);
+
+    --button-shadow-hover-color: hsla(var(--button-background-color-h), var(--button-background-color-s), var(--button-background-color-l), 0.33);
+    --button-shadow-focus-color: var(--button-shadow-hover-color);
+    --button-shadow-active-color: var(--button-shadow-hover-color);
+}
+
+@mixin button-underscored {
+    @include underscored;
+
+    &:hover:not(:disabled) {
+        box-shadow: 0 3px 0 0 var(--button-shadow-hover-color);
+    }
+
+    &:focus:not(:disabled) {
+        box-shadow: 0 3px 0 0 var(--button-shadow-focus-color);
+    }
+}
+
+@mixin button-default {
+    --button-background-color-h: #{nodzerColorHue("default")};
+    --button-background-color-s: #{nodzerColorSaturation("default")};
+    --button-background-color-l: #{nodzerColorLightness("default")};
+
+    @include button-outlined;
+}
+
+.button {
+    --button-border-width: 1px;
+    --button-height: 2.5em;
+    --button-line-height: 1.5;
+
+    position: relative;
+    box-sizing: border-box;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+
+    width: auto;
+
+    line-height: #{$button-line-height};
+
+    font-size: #{$font-size-medium};
+    font-family: #{$button-font-family};
+    font-weight: #{$button-font-weight};
+
+    border-style: solid;
+    border-width: #{$button-border-width};
+    border-radius: #{$button-border-radius};
+
+    padding-bottom: #{$button-padding-vertical};
+    padding-left: #{$button-padding-horizontal};
+    padding-right: #{$button-padding-horizontal};
+    padding-top: #{$button-padding-vertical};
+
+    cursor: pointer;
+
+    text-decoration: none;
+    user-select: none;
+    white-space: nowrap;
+
+    transition: #{$transition-fast} background-color, #{$transition-fast} color, #{$transition-fast} border, #{$transition-fast} box-shadow;
+
+    &.is-fullwidth {
+        width: 100%;
+    }
+
+    &.is-rounded {
+        border-radius: #{$border-radius-rounded};
+    }
+
+    &.is-circle {
+        padding-left: 0;
+        padding-right: 0;
+        border-radius: #{$border-radius-circle};
+        width: #{$button-height};
+        height: #{$button-height};
+    }
+
+    &::-moz-focus-inner {
+        border: 0;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &[disabled] {
+        opacity: 0.5;
+        cursor: not-allowed;
+
+        * {
+            pointer-events: none;
+        }
+    }
+
+    @include button-style;
+
+    @include button-default;
+
+    @each $color-name, $color in $colors {
+        &.is-#{$color-name} {
+            --button-background-color-h: #{nodzerColorHue($color-name)};
+            --button-background-color-s: #{nodzerColorSaturation($color-name)};
+            --button-background-color-l: #{nodzerColorLightness($color-name)};
+
+            &.is-colored {
+                --button-text-color: #{nodzerTextOnColor($color-name)};
+            }
+        }
+    }
+
+    &.is-outlined {
+        @include button-outlined;
+    }
+
+    &.is-colored {
+        --button-text-color: #{nodzerTextOnColor("default")};
+
+        @include button-colored;
+    }
+
+    &.is-underscored {
+        @include button-underscored;
+    }
+
+    @include size using ($size) {
+        font-size: #{$size};
+    }
+}

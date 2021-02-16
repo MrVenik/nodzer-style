@@ -1,0 +1,141 @@
+$colors: (
+    "background": #fafafa,
+    "primary":hsl(171, 100%, 41%),
+    "succes": hsl(141, 53%,  53%),
+    "info": hsl(204, 71%,  53%),
+    "warning": hsl(48, 100%, 67%),
+    "danger": hsl(348, 86%, 61%),
+    "grey": (var(--primary-h), 10%, 20%)
+);
+
+/*
+    $colors: (
+        "background": #212121,
+        "primary":hsl(203, 100%, 50%),
+        "succes": hsl(110, 70%,  50%),
+        "info": hsl(203, 10%,  50%),
+        "warning": hsl(40, 90%, 50%),
+        "danger": hsl(10, 95%, 50%),
+        "grey": (var(--primary-h), 10%, 20%)
+    );
+*/
+
+@function nodzerColor($color-name, $color-l: null, $color-a: 1) {
+    @if ($color-l == null) {
+        @return hsla(#{nodzerColorHue($color-name)}, #{nodzerColorSaturation($color-name)}, #{nodzerColorLightness($color-name)}, #{$color-a});
+    }
+    @else {
+        @return hsla(#{nodzerColorHue($color-name)}, #{nodzerColorSaturation($color-name)}, #{$color-l}, #{$color-a});
+    }
+}
+
+@function nodzerColorHue($color-name, $color-h-delta: null) {
+    @if ($color-h-delta == null) {
+        @return var(--#{$color-name}-h);
+    }
+    @else {
+        @return calc(var(--#{$color-name}-h) + #{$color-h-delta});
+    }
+}
+
+@function nodzerColorSaturation($color-name, $color-s-delta: null) {
+    @if ($color-s-delta == null) {
+        @return var(--#{$color-name}-s);
+    }
+    @else {
+        @return calc(var(--#{$color-name}-s) + #{$color-s-delta});
+    }
+}
+
+@function nodzerColorLightness($color-name, $color-l-delta: null) {
+    @if ($color-l-delta == null) {
+        @return var(--#{$color-name}-l);
+    }
+    @else {
+        @return calc(var(--#{$color-name}-l) + #{$color-l-delta});
+    }
+}
+
+@function nodzerColorLightDiff($color-name, $color-l-delta, $color-a: 1) {
+    @return hsla(#{nodzerColorHue($color-name)}, #{nodzerColorSaturation($color-name)}, #{nodzerColorLightness($color-name, $color-l-delta)}, #{$color-a});
+}
+
+@function nodzerColorLighter($color-name, $color-l-delta, $color-a: 1) {
+    @return nodzerColorLightDiff($color-name, $color-l-delta, $color-a);
+}
+
+@function nodzerColorDarker($color-name, $color-l-delta, $color-a: 1) {
+    @return nodzerColorLightDiff($color-name, -$color-l-delta, $color-a);
+}
+
+@function nodzerTextOnColor($color-name, $color-l-delta: 0%, $color-a: 1) {
+    $text-color-multiplier: var(--#{$color-name}-text-color-multiplier);
+    $text-color-diff: calc(#{$text-color-multiplier} * 65%);
+    $text-color-l-diff: calc(#{$text-color-multiplier} * #{$color-l-delta});
+    $text-color-l: calc(#{nodzerColorLightness($color-name, $text-color-l-diff)} + #{$text-color-diff});
+    @return hsla(#{nodzerColorHue($color-name)}, #{nodzerColorSaturation($color-name)}, #{$text-color-l}, #{$color-a});
+}
+
+@function nodzerTextOnColorLight($color-name) {
+    @return nodzerTextOnColor($color-name, -10%);
+}
+
+@function nodzerTextOnColorStrong($color-name) {
+    @return nodzerTextOnColor($color-name, 10%);
+}
+
+@function nodzerTextOnColorLighter($color-name, $color-l-delta, $color-a: 1) {
+    @return nodzerTextOnColor($color-name, -$color-l-delta, $color-a);
+}
+
+@function nodzerTextOnColorStronger($color-name, $color-l-delta, $color-a: 1) {
+    @return nodzerTextOnColor($color-name, $color-l-delta, $color-a);
+}
+
+@function findTextColorMultiplier($color) {
+    @if (type-of($color) == "color") {
+        @if (lightness($color) > 55%) {
+            @return -1;
+        }
+        @else {
+            @return 1;
+        }
+    }
+    @else {
+        @if ($color > 55%) {
+            @return -1;
+        }
+        @else {
+            @return 1;
+        }
+    }
+}
+
+:root {
+    @each $color-name, $color in $colors {
+        $color-h: null;
+        $color-s: null;
+        $color-l: null;
+        $text-color-multiplier: null;
+
+        @if type-of($color) == 'color' {
+            $color-h: hue($color);
+            $color-s: saturation($color);
+            $color-l: lightness($color);
+            $text-color-multiplier: findTextColorMultiplier($color);
+        }
+        @else {
+            $color-h: nth($color, 1);
+            $color-s: nth($color, 2);
+            $color-l: nth($color, 3);
+            $text-color-multiplier: findTextColorMultiplier($color-l);
+        }
+
+        --#{$color-name}-h: #{$color-h};
+        --#{$color-name}-s: #{$color-s};
+        --#{$color-name}-l: #{$color-l};
+        --#{$color-name}: hsl(var(--#{$color-name}-h), var(--#{$color-name}-s), var(--#{$color-name}-l));
+        --#{$color-name}-text-color-multiplier: #{$text-color-multiplier};
+    }
+}
+

@@ -1,0 +1,17 @@
+$icon-sizes: $font-sizes;
+
+.icon {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    height: #{$font-size-medium};
+    width: #{$font-size-medium};
+    color: inherit;
+
+    @each $size-name, $size in $icon-sizes {
+        &.is-#{$size-name} {
+            height: #{$size};
+            width: #{$size};
+        }
+    }
+}

@@ -1,0 +1,361 @@
+$input-border-radius: $border-radius-medium;
+
+$input-border-width: var(--input-border-width, 1px);
+
+$input-height: var(--input-height, 2.5em);
+$input-line-height: var(--input-line-height, 1.5);
+
+$input-padding-vertical: calc(0.5em - #{$input-border-width});
+$input-padding-horizontal: calc(0.75em - #{$input-border-width});
+
+$input-font-family: $font-sans;
+
+$input-font-weight: $font-weight-semibold;
+
+.input {
+    --input-border-width: 1px;
+    --input-height: 2.5em;
+    --input-line-height: 1.5;
+
+    position: relative;
+    flex: 1 1 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    vertical-align: middle;
+
+    font-size: #{$font-size-medium};
+    font-family: #{$input-font-family};
+    font-weight: #{$input-font-weight};
+
+    color: nodzerTextOnColor("background");
+
+    &.is-rounded {
+        input, select {
+            border-radius: #{$border-radius-rounded};
+        }
+    }
+
+    input, select, textarea {
+        &:not([type="radio"]):not([type="checkbox"]) {
+            -moz-appearance: none;
+            -webkit-appearance: none;
+        
+            position: relative;
+            flex: 1 1 auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: flex-start;
+            vertical-align: middle;
+            min-width: 0;
+            width: 100%;
+            margin: 0;
+        
+            padding-bottom: #{$input-padding-vertical};
+            padding-left: #{$input-padding-horizontal};
+            padding-right: #{$input-padding-horizontal};
+            padding-top: #{$input-padding-vertical};
+        }
+
+        &[type="radio"], &[type="checkbox"] {
+            cursor: pointer;
+            display: inline-block;
+            line-height: 1.25;
+            position: relative;
+        }
+
+        border-style: solid;
+        border-width: #{$input-border-width};
+        border-radius: #{$input-border-radius};
+    
+        box-shadow: none;
+
+        font-size: inherit;
+        font-family: inherit;
+        font-weight: inherit;
+    
+        line-height: #{$input-line-height};
+    
+        color: nodzerTextOnColor("background");
+        background-color: nodzerColor("background");
+        border-color: nodzerColor("grey", 50%);
+    
+        transition: #{$transition-fast} color, #{$transition-fast} border, #{$transition-fast} box-shadow;
+    
+        &::placeholder {
+            color: nodzerTextOnColorLighter("background", 20%);
+            user-select: none;
+        }
+    
+        &:hover:not([disabled]) {
+            background-color: nodzerColorLighter("background", 10%);
+            border-color: nodzerColorLighter("primary", 30%);
+            color: nodzerColorDarker("primary", 10%);
+        }
+    
+        &:focus:not([disabled]) {
+            //color: nodzerColorDarker("primary", 10%);
+
+            background-color: nodzerColorLighter("background", 5%);
+            border-color: nodzerColor("primary");
+            box-shadow: 0 0 0 3px hsla(#{nodzerColorHue("primary")}, #{nodzerColorSaturation("primary")}, 50%, 0.33);
+            outline: none;
+            color: nodzerTextOnColor("background");
+        }
+    
+        &[disabled] {
+            opacity: 0.5;
+            cursor: not-allowed;
+    
+            color: nodzerTextOnColorLighter("background", 20%);
+    
+            &::placeholder {
+                color: nodzerTextOnColorLighter("background", 30%);
+            }        
+        }
+    }
+
+    @each $color-name, $color in $colors {
+        &.is-#{$color-name} {
+            input, select, textarea {          
+                background-color: nodzerColor("background");
+                border-color: nodzerColor($color-name);
+        
+                &:hover:not([disabled]) {
+                    background-color: nodzerColorLighter("background", 10%);
+                    border-color: nodzerColorDarker($color-name, 10%);
+                    color: nodzerColorDarker($color-name, 20%);
+                }
+        
+                &:focus:not([disabled]) {
+                    background-color: nodzerColorLighter("background", 5%);
+                    border-color: nodzerColorDarker($color-name, 10%);
+
+                    box-shadow: 0 0 0 3px hsla(#{nodzerColorHue($color-name)}, #{nodzerColorSaturation($color-name)}, 50%, 0.33);
+                    outline: none;
+                    color: nodzerTextOnColor("background");
+                }
+            }
+
+            &.has-icons-right, &.has-icons-left {
+                input, select {
+                    &:hover:not([disabled]) {
+                        & ~ .icon {
+                            color: nodzerColorDarker($color-name, 20%);
+                        }
+                    }
+        
+                    &:focus:not([disabled]) {
+                        & ~ .icon {
+                            color: nodzerTextOnColor("background");
+                        }
+                    }
+                }
+            }
+
+            &.is-select {
+                &:hover {
+                    &::after {
+                        border-color: nodzerColorDarker($color-name, 20%);
+                    }
+                }
+
+                &:focus-within {
+                    &::after {
+                        border-color: nodzerTextOnColor("background");
+                    }
+                }
+            }
+        }
+    }
+
+    textarea {
+        max-height: 40em;
+        min-height: 8em;
+        resize: vertical;
+    }
+
+    select {
+        cursor: pointer;
+    }
+
+    &.is-radio, &.is-checkbox {
+        cursor: pointer;
+    }
+
+    &.is-select {
+        width: 100%;
+
+        select {
+            padding-right: #{$input-height};
+        }
+
+        &::after {
+            border: 3px solid nodzerTextOnColor("background");
+            border-radius: 2px;
+            border-right: 0;
+            border-top: 0;
+            content: " ";
+            display: block;
+            height: 0.625em;
+            margin-top: -0.4375em;
+            pointer-events: none;
+            position: absolute;
+            top: 50%;
+            right: 0.885em;
+            transform: rotate(-45deg);
+            transform-origin: center;
+            width: 0.625em;
+        }
+
+        &:hover {
+            &::after {
+                border-color: nodzerColorDarker("primary", 20%);
+            }
+        }
+
+        &:focus-within {
+            &::after {
+                border-color: nodzerTextOnColor("background");
+            }
+        }
+    }
+
+    &.has-icons-right, &.has-icons-left {
+        input, select {
+            &:hover:not([disabled]) {
+                & ~ .icon {
+                    color: nodzerColorDarker("primary", 10%);
+                }
+            }
+
+            &:focus:not([disabled]) {
+                & ~ .icon {
+                    color: nodzerColor("grey", 30%);
+                }
+            }
+
+            &[disabled] {
+                & ~ .icon {
+                    color: nodzerTextOnColorLighter("background", 20%);
+                }
+            }
+        }
+
+        .icon {
+            color: nodzerTextOnColor("background");
+            height: #{$input-height};
+            width: #{$input-height};
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+            z-index: 4;
+        }
+    }
+
+    &.has-icons-left {
+        input, select {
+            padding-left:#{$input-height};
+        }
+        .icon {
+            &.is-left {
+                left: 0;
+            }
+        }
+    }
+
+    &.has-icons-right {
+        input, select {
+            padding-right: #{$input-height};
+        }
+        .icon {
+            &.is-right {
+                right: 0;
+            }
+        }
+    }
+
+    @include size using ($size) {
+        font-size: #{$size};
+    }
+}
+
+.input-group {
+    display: flex;
+    justify-content: flex-start;
+
+    flex-grow: 1;
+    flex-shrink: 1;
+
+    .input-group-text {
+        position: relative;
+        box-sizing: border-box;
+    
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    
+        line-height: #{$input-line-height};
+    
+        padding-bottom: #{$input-padding-vertical};
+        padding-left: #{$input-padding-horizontal};
+        padding-right: #{$input-padding-horizontal};
+        padding-top: #{$input-padding-vertical};
+    
+        width: auto;
+    
+        border-style: solid;
+        border-width: #{$input-border-width};
+        font-family: #{$input-font-family};
+        font-weight: #{$input-font-weight};
+        text-decoration: none;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: default;
+    
+        background-color: nodzerColor("background");
+        border-color: nodzerColor("grey", 50%);
+        color: nodzerTextOnColor("background");
+    
+        font-size: #{$font-size-medium};
+        border-radius: #{$input-border-radius};
+    }
+
+    &.is-rounded {
+        .button, .input input, .input-group-text {
+            border-radius: #{$border-radius-rounded};     
+        }
+    }
+
+    .button, .input, .input-group-text {
+        font-size: #{$font-size-medium};
+
+        &:not(:first-child) {
+            margin-left: #{$button-group-offset};
+        }
+
+        &:focus, &:focus-within {
+            z-index: 1;
+        }
+    
+        &:hover {
+            z-index: 2;
+        }
+    }
+
+    .button:not(:first-child), .input:not(:first-child) input, .input:not(:first-child) select, .input-group-text:not(:first-child) {
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+    }
+
+    .button:not(:last-child), .input:not(:last-child) input, .input:not(:last-child) select, .input-group-text:not(:last-child) {
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    @include size using ($size) {
+        .button, .input, .input-group-text {
+            font-size: #{$size};
+        }
+    }
+}

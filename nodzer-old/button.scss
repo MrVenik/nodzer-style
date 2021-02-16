@@ -1,0 +1,245 @@
+$button-border-width: var(--button-border-width, 1px);
+$button-border-radius: $border-radius-medium;
+
+$button-height: var(--button-height, 2.5em);
+$button-line-height: var(--button-line-height, 1.5);
+
+$button-padding-vertical: calc(0.5em - #{$button-border-width});
+$button-padding-horizontal: 1em;
+
+$button-group-offset: calc(-1 * #{$button-border-width});
+
+$button-font-family: $font-sans;
+
+$button-font-weight: $font-weight-semibold;
+
+@mixin button-spacing($spacing: $spacing-xx-small) {
+    .button {
+        &:not(:last-child) {
+            margin-right: #{$spacing};
+        }
+    }
+
+    .button-group {
+        .button {
+            &:last-child {
+                margin-right: #{$spacing};
+            }
+            &:not(:last-child) {
+                margin-right: #{$button-group-offset};
+            }
+        }
+    }
+}
+
+.button {
+    --button-border-width: 1px;
+    --button-height: 2.5em;
+    --button-line-height: 1.5;
+
+    position: relative;
+    box-sizing: border-box;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    line-height: #{$button-line-height};
+
+    padding-bottom: #{$button-padding-vertical};
+    padding-left: #{$button-padding-horizontal};
+    padding-right: #{$button-padding-horizontal};
+    padding-top: #{$button-padding-vertical};
+
+    width: auto;
+    cursor: pointer;
+
+    border-style: solid;
+    border-width: #{$button-border-width};
+    font-family: #{$button-font-family};
+    font-weight: #{$button-font-weight};
+    text-decoration: none;
+    user-select: none;
+    white-space: nowrap;
+    vertical-align: middle;
+    transition: #{$transition-fast} background-color, #{$transition-fast} color, #{$transition-fast} border, #{$transition-fast} box-shadow;
+
+    background-color: nodzerColor("background");
+    border-color: nodzerColor("grey", 50%);
+    color: nodzerTextOnColor("background");
+
+    font-size: #{$font-size-medium};
+    border-radius: #{$button-border-radius};
+
+    &.is-rounded {
+        border-radius: #{$border-radius-rounded};
+    }
+
+    &.is-circle {
+        padding-left: 0;
+        padding-right: 0;
+        border-radius: #{$border-radius-circle};
+        width: #{$button-height};
+        height: #{$button-height};
+    }
+
+    &::-moz-focus-inner {
+        border: 0;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &[disabled] {
+        opacity: 0.5;
+        cursor: not-allowed;
+
+        * {
+            pointer-events: none;
+        }
+    }
+
+    &:hover:not([disabled]) {
+        background-color: nodzerColorLighter("background", 10%);
+        border-color: nodzerColorLighter("primary", 30%);
+        color: nodzerColorDarker("primary", 10%);
+    }
+
+    &:focus:not([disabled]) {
+        background-color: nodzerColorLighter("background", 10%);
+        border-color: nodzerColorLighter("primary", 20%);
+        color: nodzerColorDarker("primary", 10%);
+        box-shadow: 0 0 0 3px hsla(#{nodzerColorHue("primary")}, #{nodzerColorSaturation("primary")}, 50%, 0.33);
+    }
+
+    &:active:not([disabled]) {
+        background-color: nodzerColor("background");
+        border-color: nodzerColor("primary");
+        color: nodzerColorDarker("primary", 20%);
+    }
+
+    @each $color-name, $color in $colors {
+        &.is-#{$color-name} {
+            background-color: nodzerColor($color-name);
+            border-color: nodzerColor($color-name);
+            color: nodzerTextOnColor($color-name);
+    
+            &.is-outlined {
+                background-color: nodzerColor("background");
+                color: nodzerTextOnColor("background");
+            }
+
+            &:hover:not([disabled]) {
+                background-color: nodzerColorDarker($color-name, 10%);
+                border-color: nodzerColorDarker($color-name, 10%);
+                color: nodzerTextOnColor($color-name);
+
+                &.is-outlined {
+                    background-color: nodzerColor($color-name, $color-a: 0.5);
+                    color: nodzerColorDarker($color-name, 5%);
+                }
+            }
+    
+            &:focus:not([disabled]) {
+                background-color: nodzerColorDarker($color-name, 10%);
+                border-color: nodzerColorDarker($color-name, 10%);
+                color: nodzerTextOnColor($color-name);
+                box-shadow: 0 0 0 3px hsla(#{nodzerColorHue($color-name)}, #{nodzerColorSaturation($color-name)}, 50%, 0.33);
+
+                &.is-outlined {
+                    background-color: nodzerColor($color-name, $color-a: 0.5);
+                    color: nodzerColorDarker($color-name, 5%);
+                }
+            }
+    
+            &:active:not([disabled]) {
+                background-color: nodzerColor($color-name);
+                border-color: nodzerColor($color-name);
+                color: nodzerTextOnColor($color-name);
+
+                &.is-outlined {
+                    background-color: nodzerColor($color-name, $color-a: 0.4);
+                    color: nodzerColorDarker($color-name, 10%);
+                }
+            }
+        }
+    }
+
+    @include size using ($size) {
+        font-size: #{$size};
+    }
+}
+
+.buttons, .button-group {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.buttons {
+    flex-wrap: wrap;
+
+    &.are-rounded {
+        .button {
+            border-radius: #{$border-radius-rounded};     
+        }
+    }
+
+    @include button-spacing;
+
+    @include space-between using ($spacing) {
+        @include button-spacing($spacing);
+    }
+
+    @include size("are", true) using ($size, $not-sizes) {
+        > .button#{$not-sizes} {
+            font-size: #{$size};
+        }
+
+        .button-group#{$not-sizes} {
+            .button {
+                font-size: #{$size};
+            }          
+        }
+    }
+}
+
+.button-group {
+    flex-wrap: wrap;
+
+    &.is-rounded {
+        .button {
+            border-radius: #{$border-radius-rounded};     
+        }
+    }
+
+    .button {
+        font-size: #{$font-size-medium};
+
+        &:not(:first-child) {
+            border-bottom-left-radius: 0;
+            border-top-left-radius: 0;
+        }
+    
+        &:not(:last-child) {
+            border-bottom-right-radius: 0;
+            border-top-right-radius: 0;
+            margin-right: #{$button-group-offset};
+        }
+    
+        &:focus {
+            z-index: 1;
+        }
+    
+        &:hover {
+            z-index: 2;
+        }
+    }
+
+    @include size using ($size) {
+        .button {
+            font-size: #{$size};
+        }
+    }
+}

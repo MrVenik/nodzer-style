@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="site.css">
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+    <script src="main.js"></script>
+    <style>
+        .inputs {
+            position: relative;
+            margin: 0.5em;
+        }
+
+        .inputs > * {
+            width: 100%;
+        }
+
+        .inputs > *:not(:last-child) {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="fields is-space-between-small" style="margin: 0.5em;">
+        <div class="field">
+            <label class="field-label">From</label>
+            <div class="field-body">
+                <div class="field-content">
+                    <div class="input has-icons-left is-succes is-colored">
+                        <input type="text" placeholder="Name">
+                        <div class="icon is-left"><span class="iconify" data-icon="fa:user" data-inline="false"></span></div>
+                    </div>
+                    <div class="input is-fullwidth has-icons-left has-icons-right">
+                        <input type="email" placeholder="Email" value="alex@smith.com">
+                        <div class="icon is-left"><span class="iconify" data-icon="fa:envelope" data-inline="false"></span></div>
+                        <div class="icon is-right"><span class="iconify" data-icon="fa:check" data-inline="false"></span></div>
+                    </div>
+                </div>
+                <div class="field-content">
+                    <div class="control-group is-fullwidth is-danger">
+                        <div class="control-text">+44</div>
+                        <div class="input is-fullwidth"><input type="text" placeholder="Your phone number"></div>
+                    </div>
+                </div>
+                <div class="field-help">Do not enter the first zero</div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="field-label">Background Color</label>
+            <div class="field-body">
+                <div class="field-content">
+                    <div class="input is-fullwidth">
+                        <input type="color" oninput="changeColor(event)">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="field-label">File Input</label>
+            <div class="field-body">
+                <div class="field-content">
+                    <div class="control-group is-fullwidth">
+                        <button class="button">
+                            <label class="input-file">
+                                <input type="file">
+                                <span class="iconify" style="margin-right: 0.5em;" data-icon="fa-solid:upload" data-inline="false"></span>
+                                <span>Upload file</span>
+                            </label>
+                        </button>
+                        <div class="control-text is-fullwidth if-justify-start">Selected file...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="field-label">Department</label>
+            <div class="field-body">
+                <div class="field-content">
+                    <div class="input is-fullwidth is-select">
+                        <select>
+                            <option>Business development</option>
+                            <option>Marketing</option>
+                            <option>Sales</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="" class="field-label">Already a member?</label>
+            <div class="field-body">
+                <div class="field-content">
+                    <div>
+                        <label class="input-radio">
+                            <input type="radio" name="member">
+                            Yes
+                        </label>
+                        <label class="input-radio">
+                            <input type="radio" name="member">
+                            No
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="field-label">Subject</label>
+            <div class="field-body">
+                <div class="field-content">
+                    <div class="input is-fullwidth is-danger"><input type="text" placeholder="e.g. Partnership opportunity"></div>
+                </div>
+                <div class="field-help is-danger">This field is required</div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="field-label">Question</label>
+            <div class="field-body">
+                <div class="field-content">
+                    <div class="input is-fullwidth"><textarea placeholder="Explain how we can help you"></textarea></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="field-label"></label>
+            <div class="field-body">
+                <div class="field-content">
+                    <button class="button is-colored is-primary">Send message</button>
+                    <button class="button is-danger is-outlined">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button class="button is-outlined">Default O</button>
+        <button class="button is-primary is-outlined">Primary O</button>
+        <button class="button is-info is-outlined">Info O</button>
+        <button class="button is-succes is-outlined">Succes O</button>
+        <button class="button is-danger is-outlined">Danger O</button>
+        <button class="button is-warning is-outlined">Warning O</button>
+    </div>
+    <div class="buttons">
+        <button class="button is-colored">Default</button>
+        <button class="button is-primary is-colored">Primary</button>
+        <button class="button is-info is-colored">Info</button>
+        <button class="button is-succes is-colored">Succes</button>
+        <button class="button is-danger is-colored">Danger</button>
+        <button class="button is-warning is-colored">Warning</button>
+    </div>
+
+    <div class="inputs">
+        <button class="button is-xx-small">Hello World</button>
+        <button class="button is-x-small">Hello World</button>
+        <button class="button is-small">Hello World</button>
+        <button class="button is-medium">Hello World</button>
+        <button class="button is-large">Hello World</button>
+        <button class="button is-x-large">Hello World</button>
+        <button class="button is-xx-large">Hello World</button>
+        <button class="button is-xxx-large">Hello World</button>
+        <div>
+            <button class="button">Hello World</button>
+            <div class="input"><input type="text" name="name" placeholder="Ім’я"></div>
+        </div>
+        <div class="input"><input type="text" name="name" placeholder="Ім’я"></div>
+        <div class="input"><input type="text" name="surname" placeholder="Прізвище"></div>
+        <div class="input"><input type="text" name="country" placeholder="Країна"></div>
+        <div class="input"><input type="text" name="city" placeholder="Місто"></div>
+        <div class="input"><input type="text" name="adress" placeholder="Адреса"></div>
+        <div class="input"><input type="text" name="index" placeholder="Індекс"></div>
+        <div class="input"><input type="date" name="birthday"></div>
+        <div class="input"><input type="email" name="email" placeholder="Електронна пошта"></div>
+        <div class="input"><input type="tel" name="tel" placeholder="Номер телефону"></div>
+        <div class="input"><input type="number" name="count" placeholder="Count"></div>
+        <div class="input"><input type="search" name="search" placeholder="Search"></div>
+        <div class="input"><input type="datetime" name="datetime" placeholder="Datetime"></div>
+        <div class="input"><input type="datetime-local" name="datetime-local" placeholder="Datetime-local"></div>
+        <div class="input"><input type="time" name="time" placeholder="Time"></div>
+        <div class="input"><input type="month" name="month" placeholder="Month"></div>
+        <div class="input"><input type="week" name="week" placeholder="Week"></div>
+        <div class="input"><input type="url" name="url" placeholder="URL"></div>
+        <div class="input has-icons-left has-icons-right">
+            <input type="email" placeholder="Email" value="alex@smith.com">
+            <div class="icon is-left"><span class="iconify" data-icon="fa:envelope" data-inline="false"></span></div>
+            <div class="icon is-right"><span class="iconify" data-icon="fa:check" data-inline="false"></span></div>
+        </div>
+        <div class="input is-select has-icons-right">
+            <select>
+                <option>Business development</option>
+                <option>Marketing</option>
+                <option>Sales</option>
+            </select>
+            <div class="icon is-right"><span class="iconify" data-icon="fa:check" data-inline="false"></span></div>
+        </div>
+        <div class="input"><input type="color" name="color"></div>
+        <div class="input"><textarea></textarea></div>
+        <div class="input-range"><input type="range" name="range" placeholder="Range"></div>
+        <div>
+            <label class="input-radio"><input type="radio" name="member">Yes</label>
+            <label class="input-radio"><input type="radio" name="member">No</label>
+        </div>
+        <div>
+            <label class="input-checkbox"><input type="checkbox">Yes</label>
+            <label class="input-checkbox"><input type="checkbox">No</label>
+        </div>
+    </div>
+
+    <div class="inputs">
+        <div class="input is-small"><input type="text" name="name" placeholder="Ім’я"></div>
+        <div class="input is-small"><input type="text" name="surname" placeholder="Прізвище"></div>
+        <div class="input is-small"><input type="text" name="country" placeholder="Країна"></div>
+        <div class="input is-small"><input type="text" name="city" placeholder="Місто"></div>
+        <div class="input is-small"><input type="text" name="adress" placeholder="Адреса"></div>
+        <div class="input is-small"><input type="text" name="index" placeholder="Індекс"></div>
+        <div class="input is-small"><input type="date" name="birthday"></div>
+        <div class="input is-small"><input type="email" name="email" placeholder="Електронна пошта"></div>
+        <div class="input is-small"><input type="tel" name="tel" placeholder="Номер телефону"></div>
+        <div class="input is-small"><input type="number" name="count" placeholder="Count"></div>
+        <div class="input is-small"><input type="search" name="search" placeholder="Search"></div>
+        <div class="input is-small"><input type="datetime" name="datetime" placeholder="Datetime"></div>
+        <div class="input is-small"><input type="datetime-local" name="datetime-local" placeholder="Datetime-local"></div>
+        <div class="input is-small"><input type="time" name="time" placeholder="Time"></div>
+        <div class="input is-small"><input type="month" name="month" placeholder="Month"></div>
+        <div class="input is-small"><input type="week" name="week" placeholder="Week"></div>
+        <div class="input is-small"><input type="url" name="url" placeholder="URL"></div>
+        <div class="input is-small has-icons-left has-icons-right">
+            <input type="email" placeholder="Email" value="alex@smith.com">
+            <div class="icon is-left"><span class="iconify" data-icon="fa:envelope" data-inline="false"></span></div>
+            <div class="icon is-right"><span class="iconify" data-icon="fa:check" data-inline="false"></span></div>
+        </div>
+        <div class="input is-small is-select">
+            <select>
+                <option>Business development</option>
+                <option>Marketing</option>
+                <option>Sales</option>
+            </select>
+        </div>
+        <div class="input is-small"><input type="color" name="color"></div>
+        <div class="input is-small"><textarea></textarea></div>
+        <div class="input-range is-small"><input type="range" name="range" placeholder="Range"></div>
+        <div>
+            <label class="input-radio is-small"><input type="radio" name="member">Yes</label>
+            <label class="input-radio is-small"><input type="radio" name="member">No</label>
+        </div>
+        <div>
+            <label class="input-checkbox is-small"><input type="checkbox">Yes</label>
+            <label class="input-checkbox is-small"><input type="checkbox">No</label>
+        </div>
+    </div>
+
+    <div class="inputs">
+        <div class="input is-large"><input type="text" name="name" placeholder="Ім’я"></div>
+        <div class="input is-large"><input type="text" name="surname" placeholder="Прізвище"></div>
+        <div class="input is-large"><input type="text" name="country" placeholder="Країна"></div>
+        <div class="input is-large"><input type="text" name="city" placeholder="Місто"></div>
+        <div class="input is-large"><input type="text" name="adress" placeholder="Адреса"></div>
+        <div class="input is-large"><input type="text" name="index" placeholder="Індекс"></div>
+        <div class="input is-large"><input type="date" name="birthday"></div>
+        <div class="input is-large"><input type="email" name="email" placeholder="Електронна пошта"></div>
+        <div class="input is-large"><input type="tel" name="tel" placeholder="Номер телефону"></div>
+        <div class="input is-large"><input type="number" name="count" placeholder="Count"></div>
+        <div class="input is-large"><input type="search" name="search" placeholder="Search"></div>
+        <div class="input is-large"><input type="datetime" name="datetime" placeholder="Datetime"></div>
+        <div class="input is-large"><input type="datetime-local" name="datetime-local" placeholder="Datetime-local"></div>
+        <div class="input is-large"><input type="time" name="time" placeholder="Time"></div>
+        <div class="input is-large"><input type="month" name="month" placeholder="Month"></div>
+        <div class="input is-large"><input type="week" name="week" placeholder="Week"></div>
+        <div class="input is-large"><input type="url" name="url" placeholder="URL"></div>
+        <div class="input is-large has-icons-left has-icons-right">
+            <input type="email" placeholder="Email" value="alex@smith.com">
+            <div class="icon is-left"><span class="iconify" data-icon="fa:envelope" data-inline="false"></span></div>
+            <div class="icon is-right"><span class="iconify" data-icon="fa:check" data-inline="false"></span></div>
+        </div>
+        <div class="input is-large is-select">
+            <select>
+                <option>Business development</option>
+                <option>Marketing</option>
+                <option>Sales</option>
+            </select>
+        </div>
+        <div class="input is-large"><input type="color" name="color"></div>
+        <div class="input is-large"><textarea></textarea></div>
+        <div class="input-range is-large"><input type="range" name="range" placeholder="Range"></div>
+        <div>
+            <label class="input-radio is-large"><input type="radio" name="member">Yes</label>
+            <label class="input-radio is-large"><input type="radio" name="member">No</label>
+        </div>
+        <div>
+            <label class="input-checkbox is-large"><input type="checkbox">Yes</label>
+            <label class="input-checkbox is-large"><input type="checkbox">No</label>
+        </div>
+    </div>
+
+    <div class="inputs">
+        <div class="input is-xx-large"><input type="text" name="name" placeholder="Ім’я"></div>
+        <div class="input is-xx-large"><input type="text" name="surname" placeholder="Прізвище"></div>
+        <div class="input is-xx-large"><input type="text" name="country" placeholder="Країна"></div>
+        <div class="input is-xx-large"><input type="text" name="city" placeholder="Місто"></div>
+        <div class="input is-xx-large"><input type="text" name="adress" placeholder="Адреса"></div>
+        <div class="input is-xx-large"><input type="text" name="index" placeholder="Індекс"></div>
+        <div class="input is-xx-large"><input type="date" name="birthday"></div>
+        <div class="input is-xx-large"><input type="email" name="email" placeholder="Електронна пошта"></div>
+        <div class="input is-xx-large"><input type="tel" name="tel" placeholder="Номер телефону"></div>
+        <div class="input is-xx-large"><input type="number" name="count" placeholder="Count"></div>
+        <div class="input is-xx-large"><input type="search" name="search" placeholder="Search"></div>
+        <div class="input is-xx-large"><input type="datetime" name="datetime" placeholder="Datetime"></div>
+        <div class="input is-xx-large"><input type="datetime-local" name="datetime-local" placeholder="Datetime-local"></div>
+        <div class="input is-xx-large"><input type="time" name="time" placeholder="Time"></div>
+        <div class="input is-xx-large"><input type="month" name="month" placeholder="Month"></div>
+        <div class="input is-xx-large"><input type="week" name="week" placeholder="Week"></div>
+        <div class="input is-xx-large"><input type="url" name="url" placeholder="URL"></div>
+        <div class="input is-xx-large has-icons-left has-icons-right">
+            <input type="email" placeholder="Email" value="alex@smith.com">
+            <div class="icon is-left"><span class="iconify" data-icon="fa:envelope" data-inline="false"></span></div>
+            <div class="icon is-right"><span class="iconify" data-icon="fa:check" data-inline="false"></span></div>
+        </div>
+        <div class="input is-xx-large is-select">
+            <select>
+                <option>Business development</option>
+                <option>Marketing</option>
+                <option>Sales</option>
+            </select>
+        </div>
+        <div class="input is-xx-large"><input type="color" name="color"></div>
+        <div class="input is-xx-large"><textarea></textarea></div>
+        <div class="input-range is-xx-large"><input type="range" name="range" placeholder="Range"></div>
+        <div>
+            <label class="input-radio is-xx-large"><input type="radio" name="member">Yes</label>
+            <label class="input-radio is-xx-large"><input type="radio" name="member">No</label>
+        </div>
+        <div>
+            <label class="input-checkbox is-xx-large"><input type="checkbox">Yes</label>
+            <label class="input-checkbox is-xx-large"><input type="checkbox">No</label>
+        </div>
+    </div>
+
+    <div class="inputs">
+        <div class="input is-rounded"><input type="text" name="name" placeholder="Ім’я"></div>
+        <div class="input is-rounded"><input type="text" name="surname" placeholder="Прізвище"></div>
+        <div class="input is-rounded"><input type="text" name="country" placeholder="Країна"></div>
+        <div class="input is-rounded"><input type="text" name="city" placeholder="Місто"></div>
+        <div class="input is-rounded"><input type="text" name="adress" placeholder="Адреса"></div>
+        <div class="input is-rounded"><input type="text" name="index" placeholder="Індекс"></div>
+        <div class="input is-rounded"><input type="date" name="birthday"></div>
+        <div class="input is-rounded"><input type="email" name="email" placeholder="Електронна пошта"></div>
+        <div class="input is-rounded"><input type="tel" name="tel" placeholder="Номер телефону"></div>
+        <div class="input is-rounded"><input type="number" name="count" placeholder="Count"></div>
+        <div class="input is-rounded"><input type="search" name="search" placeholder="Search"></div>
+        <div class="input is-rounded"><input type="datetime" name="datetime" placeholder="Datetime"></div>
+        <div class="input is-rounded"><input type="datetime-local" name="datetime-local" placeholder="Datetime-local"></div>
+        <div class="input is-rounded"><input type="time" name="time" placeholder="Time"></div>
+        <div class="input is-rounded"><input type="month" name="month" placeholder="Month"></div>
+        <div class="input is-rounded"><input type="week" name="week" placeholder="Week"></div>
+        <div class="input is-rounded"><input type="url" name="url" placeholder="URL"></div>
+        <div class="input is-rounded has-icons-left has-icons-right">
+            <input type="email" placeholder="Email" value="alex@smith.com">
+            <div class="icon is-left"><span class="iconify" data-icon="fa:envelope" data-inline="false"></span></div>
+            <div class="icon is-right"><span class="iconify" data-icon="fa:check" data-inline="false"></span></div>
+        </div>
+        <div class="input is-rounded is-select">
+            <select>
+                <option>Business development</option>
+                <option>Marketing</option>
+                <option>Sales</option>
+            </select>
+        </div>
+        <div class="input is-rounded"><input type="color" name="color"></div>
+        <div class="input is-rounded"><textarea></textarea></div>
+    </div>
+</body>
+</html>

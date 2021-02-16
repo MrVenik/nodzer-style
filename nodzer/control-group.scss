@@ -1,0 +1,223 @@
+$control-group-offset: calc(-1 * #{$button-border-width});
+
+$control-text-border-radius: $border-radius-medium;
+
+$control-text-border-width: var(--control-text-border-width, 1px);
+
+$control-text-height: var(--control-text-height, 2.5em);
+$control-text-line-height: var(--control-text-line-height, 1.5);
+
+$control-text-padding-vertical: calc(0.5em - #{$control-text-border-width});
+$control-text-padding-horizontal: calc(0.75em - #{$control-text-border-width});
+
+$control-text-font-family: $font-sans;
+
+$control-text-font-weight: $font-weight-semibold;
+
+.control-text {
+    --control-text-border-width: 1px;
+    --control-text-height: 2.5em;
+    --control-text-line-height: 1.5;
+
+    --control-text-color: #{nodzerTextOnColor("background")};
+
+    --control-text-background-color-h: #{nodzerColorHue("default")};
+    --control-text-background-color-s: #{nodzerColorSaturation("default")};
+    --control-text-background-color-l: #{nodzerColorLightness("default")};
+
+    --control-text-background-color: transparent;
+    --control-text-border-color: hsla(var(--control-text-background-color-h), 10%, 50%, 1);
+
+    position: relative;
+    box-sizing: border-box;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+
+    width: auto;
+
+    line-height: #{$control-text-line-height};
+    height: #{$control-text-height};
+
+    font-size: #{$font-size-medium};
+    font-family: #{$control-text-font-family};
+    font-weight: #{$control-text-font-weight};
+
+    border-style: solid;
+    border-width: #{$control-text-border-width};
+    border-radius: #{$control-text-border-radius};
+
+    border-color: var(--control-text-border-color);
+    background-color: var(--control-text-background-color);
+    color: var(--control-text-color);
+
+    padding-bottom: #{$control-text-padding-vertical};
+    padding-left: #{$control-text-padding-horizontal};
+    padding-right: #{$control-text-padding-horizontal};
+    padding-top: #{$control-text-padding-vertical};
+
+    cursor: default;
+
+    &.is-justify-start {
+        justify-content: flex-start;
+    }
+
+    &.is-justify-end {
+        justify-content: flex-end;
+    }
+
+
+    &.is-fullwidth {
+        width: 100%;
+    }
+
+    &.is-rounded {
+        border-radius: #{$border-radius-rounded};
+    }
+
+    &.is-underscored {
+        @include underscored;
+    }
+
+    @each $color-name, $color in $colors {
+        &.is-#{$color-name} {
+            --control-text-background-color-h: #{nodzerColorHue($color-name)};
+            --control-text-background-color-s: #{nodzerColorSaturation($color-name)};
+            --control-text-background-color-l: #{nodzerColorLightness($color-name)};
+        }
+    }
+}
+
+.control-group {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+
+    &.is-fullwidth {
+        width: 100%;
+    }
+
+    &.is-rounded {
+        .button, .input input, .input select, .control-text {
+            border-radius: #{$border-radius-rounded};     
+        }
+    }
+
+    &.is-underscored {
+        .control-text {
+            @include underscored;
+        }
+
+        .button {
+            @include button-underscored;
+        }
+
+        .input {
+            @include input-underscored;
+        }
+    }
+
+    &.is-colored {
+        .input {
+            --input-border-color: hsla(var(--input-background-color-h), var(--input-background-color-s), var(--input-background-color-l), 1);
+        }
+    }
+
+    @each $color-name, $color in $colors {
+        &.is-#{$color-name} {
+            .control-text {
+                --control-text-background-color-h: #{nodzerColorHue($color-name)};
+                --control-text-background-color-s: #{nodzerColorSaturation($color-name)};
+                --control-text-background-color-l: #{nodzerColorLightness($color-name)};
+            }
+    
+            .button {
+                --button-background-color-h: #{nodzerColorHue($color-name)};
+                --button-background-color-s: #{nodzerColorSaturation($color-name)};
+                --button-background-color-l: #{nodzerColorLightness($color-name)};
+            }
+    
+            .input {
+                --input-background-color-h: #{nodzerColorHue($color-name)};
+                --input-background-color-s: #{nodzerColorSaturation($color-name)};
+                --input-background-color-l: #{nodzerColorLightness($color-name)};
+            }
+
+            &.is-colored {
+                .control-text {
+                    --control-text-color: #{nodzerTextOnColor($color-name)};
+                }
+        
+                .button {
+                    --button-text-color: #{nodzerTextOnColor($color-name)};
+                }
+            }
+        }
+    }
+
+    .button, .input, .control-text {
+        font-size: #{$font-size-medium};
+
+        &:not(:first-child) {
+            margin-left: #{$control-group-offset};
+        }
+
+        &:focus, &:focus-within {
+            z-index: 1;
+        }
+    
+        &:hover {
+            z-index: 2;
+        }
+    }
+
+    .button:not(:first-child), .input:not(:first-child) input, .input:not(:first-child) select, .control-text:not(:first-child) {
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+    }
+
+    .button:not(:last-child), .input:not(:last-child) input, .input:not(:last-child) select, .control-text:not(:last-child) {
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    @include size using ($size) {
+        .button, .input, .control-text {
+            font-size: #{$size};
+        }
+    }
+}
+
+.control-group-vertical {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    .control-group {
+        &:not(.is-fullwidth) {
+            width: 100%;
+            .button, .input, .control-text {
+                width: 100%;
+            }
+        }
+
+        &:not(:first-child) {
+            .button, .input, .control-text {
+                margin-top: #{$control-group-offset};
+
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+            }
+        }
+
+        &:not(:last-child) {
+            .button, .input, .control-text {
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+        }
+    }
+}

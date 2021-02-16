@@ -1,0 +1,131 @@
+$field-label-font-family: $font-sans;
+$field-label-font-weight: $font-weight-bold;
+
+@mixin field-controls {
+    > .input, > .button, > .input-group {
+        @content;
+    }
+}
+
+@mixin field-control-spacing($spacing: $spacing-xx-small) {
+    &:not(:first-child) {
+        @include mobile {
+            margin-top: #{$spacing};
+        }
+        @include not-mobile {
+            margin-left: #{$spacing};
+        }
+    }
+}
+
+.field {
+    width: 100%;
+    position: relative;
+
+    @include not-mobile {
+        display: flex;
+    }
+
+    .field-label {
+        display: block;
+        font-size: #{$font-size-medium};
+        font-family: #{$field-label-font-family};
+        font-weight: #{$field-label-font-weight};
+
+        color: nodzerTextOnColorStrong("background");
+
+        @include mobile {
+            margin-bottom: #{$spacing-x-small};
+        }
+
+        @include not-mobile {
+            flex: 1 0 0;
+            text-align: right;
+            margin-right: #{$spacing-large};
+
+            padding-bottom: #{$input-padding-vertical};
+            padding-top: #{$input-padding-vertical};
+        }
+    }
+
+    .field-body {
+        @include not-mobile {
+            flex: 5 1 0;
+            position: relative;
+            display: flex;
+            flex-direction: column;;
+        }
+
+        .field-content {
+            &:not(:first-child) {
+                margin-top: #{$spacing-xx-small};
+            }
+
+            @include not-mobile {
+                flex-grow: 1;
+                flex-shrink: 1;
+
+                position: relative;
+                display: flex;
+                align-items: center;
+            }
+
+            @include field-controls {
+                @include mobile {
+                    width: 100%;
+                }
+    
+                @include field-control-spacing;
+            }
+        }
+
+        .field-help {
+            display: block;
+            font-size: #{$font-size-small};
+            margin-top: #{$spacing-xxx-small};
+
+            color: nodzerTextOnColor("background");
+
+            font-family: #{$input-font-family};
+            font-weight: #{$input-font-weight};
+
+            @each $color-name, $color in $colors {
+                &.is-#{$color-name} {
+                    color: nodzerColor($color-name);
+                }
+            }
+        }
+    }
+
+    @include space-between using ($spacing) {
+        .field-body {
+            .field-content {
+                &:not(:first-child) {
+                    margin-top: #{$spacing};
+                }
+
+                @include field-controls {
+                    @include field-control-spacing($spacing);
+                }
+            }
+        }
+    }  
+}
+
+.fields {
+    position: relative;
+
+    .field {
+        &:not(:first-child) {
+            margin-top: #{$spacing-xx-small};
+        }
+    }
+
+    @include space-between using ($spacing) {
+        .field {
+            &:not(:first-child) {
+                margin-top: #{$spacing};
+            }
+        }
+    }
+}

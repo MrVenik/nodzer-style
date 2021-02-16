@@ -1,0 +1,80 @@
+@import "../nodzer/base/base.scss";
+@import "../nodzer/base/colors.scss";
+@import "../nodzer/base/fonts.scss";
+
+$transition-x-slow: var(--transition-x-slow, 1000ms);
+$transition-slow: var(--transition-slow, 500ms);
+$transition-medium: var(--transition-medium, 250ms);
+$transition-fast: var(--transition-fast, 150ms);
+$transition-x-fast: var(--transition-x-fast, 50ms);
+
+
+$border-radius-small: var(--border-radius-small, 0.125rem); // 2px
+$border-radius-medium: var(--border-radius-medium, 0.25rem); // 4px
+$border-radius-large: var(--border-radius-large, 0.5rem); // 8px
+$border-radius-x-large: var(--border-radius-x-large, 1rem); // 16px
+
+$border-radius-circle: var(--border-radius-circle, 50%);
+$border-radius-rounded: var(--border-radius-rounded, 9999px);
+
+:root {
+    --transition-x-slow: 1000ms;
+    --transition-slow: 500ms;
+    --transition-medium: 250ms;
+    --transition-fast: 150ms;
+    --transition-x-fast: 50ms;
+
+
+    --border-radius-small: 0.125rem; // 2px
+    --border-radius-medium: 0.25rem; // 4px
+    --border-radius-large: 0.5rem; // 8px
+    --border-radius-x-large: 1rem; // 16px
+  
+    --border-radius-circle: 50%;
+    --border-radius-rounded: 9999px;
+}
+
+body {
+    background-color: nodzerColor("background");
+}
+
+.header {
+    color: nodzerTextOnColor("background");
+    background-color: nodzerColorDarker("background", 13%);
+
+    font-family: #{$font-sans};
+    font-weight: #{$font-weight-normal};
+    font-size: #{$font-size-xx-large};
+
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100vw;
+    //box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    margin-bottom: #{$spacing-xx-large};
+}
+
+.header-element {
+    margin-left: 25px;
+    margin-right: 25px;
+    color: nodzerTextOnColor("background");
+}
+
+.header-title {
+    position: absolute;
+    text-align: center;
+    width: 100vw;
+    z-index: -1;
+    color: nodzerTextOnColor("background");
+}
+
+@import "../nodzer/mixins.scss";
+@import "../nodzer/button.scss";
+@import "../nodzer/input.scss";
+@import "../nodzer/icon.scss";
+@import "../nodzer/field.scss";
